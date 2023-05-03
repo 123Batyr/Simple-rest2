@@ -13,7 +13,7 @@ public class TimeController {
     @GetMapping("/time")
     public String getYesterdayDateTime(
             @RequestParam(value = "minusDays", defaultValue = "0")
-            int minusDays,
+            int minusDays, @RequestParam(value = "greeting", defaultValue = "– Слушай, ты же программист? Какой язык чаще всего используется программистами? – Матерный.") String greeting,
             Model model
     ) {
         LocalDateTime dateTime = LocalDateTime.now().minusDays(minusDays);
@@ -21,8 +21,10 @@ public class TimeController {
         String formattedDateTime = dateTime.format(formatter);
 
         model.addAttribute("time", formattedDateTime);
+            model.addAttribute("greeting", greeting);
 
         return "time";
-    }
 
+
+    }
 }
